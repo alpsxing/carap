@@ -1,0 +1,7 @@
+1. Install Ubuntu 12.04 server and update to the latest state;
+2. Configure to support 3G card:
+   sudo apt-get install network-manager
+   Copy "China Unicom Default" to /etc/NetworkManager/system-connections
+   Copy start3g.sh to /etc
+   Add "/etc/start3g.sh&" to /etc/rc.local
+3. Restart and you can make both 3g modems working(Unicom and ChinaNet) 

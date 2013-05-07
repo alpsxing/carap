@@ -1,0 +1,21 @@
+[connection]
+id=China Unicom Default
+uuid=500ad801-4fd1-4fd0-b0b9-c8e8a74cb6ee
+type=gsm
+timestamp=1367909199
+
+[ppp]
+lcp-echo-failure=5
+lcp-echo-interval=30
+
+[ipv4]
+method=auto
+
+[serial]
+baud=115200
+
+[gsm]
+number=*99#
+username=uninet
+password=111111
+apn=3gnet
