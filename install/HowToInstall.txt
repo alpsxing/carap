@@ -1,7 +1,23 @@
+Section 1: Install Ubuntu
 1. Install Ubuntu 12.04 server and update to the latest state;
-2. Configure to support 3G card:
+2. Copy file "interfaces" to overwrite /etc/network/interfaces.
+   Thus we have 2 lan port:
+   eth0: 192.168.16.1/255.255.255.0 used to connect to AP board. DHCP is running on this port.
+   eth1: 10.0.0.100/255.255.255.0 used to debug. You can use ssh to connect to this port.
+
+Section 2: Support 3G card:
+1. Configure to support 3G card:
    sudo apt-get install network-manager
    Copy "China Unicom Default" to /etc/NetworkManager/system-connections
    Copy start3g.sh to /etc
    Add "/etc/start3g.sh&" to /etc/rc.local
-3. Restart and you can make both 3g modems working(Unicom and ChinaNet) 
+   This script is to detect Unicom 3G card and config the modem automatically.
+2. Restart and you can make both 3g modems working(Unicom and ChinaNet) 
+
+Section 3: IP forward
+1. Install package isc-dhcp-server
+2. Copy dhcpd.conf to overwrite /etc/dhcp/dhcpd.conf
+3. Copy startforward.sh to /etc
+   This script is to detect the 3G card and config iptables.
+4. Add "/etc/startforward.sh&" to /etc/rc.local
+5. Restart and the board can work as a NAT router.

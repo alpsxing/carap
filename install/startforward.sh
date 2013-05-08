@@ -1,0 +1,22 @@
+#!/bin/bash
+while true; do
+    LC_ALL=C ifconfig -s | grep -q "^eth2"
+    if [ $? -eq 0 ]; then
+        echo "ChinaNet connected"
+	echo 1 > /proc/sys/net/ipv4/ip_forward
+        iptables -P FORWARD ACCEPT
+        iptables -t nat -A POSTROUTING -o eth2 -j MASQUERADE
+        echo "finish config"
+        exit
+    fi
+    LC_ALL=C ifconfig -s | grep -q "^ppp0"
+    if [ $? -eq 0 ]; then
+        echo "UniCom connected"
+        echo 1 > /proc/sys/net/ipv4/ip_forward
+        iptables -P FORWARD ACCEPT
+        iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
+        echo "finish config"
+        exit
+    fi
+    sleep 2
+done
